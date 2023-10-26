@@ -1,11 +1,12 @@
 # Ignore all
-*
+/*
 
 # Except these
 !.gitignore
+!README.md
 
 # .config
-!.config/nvim/**
+!.config/nvim/*
 !.config/tmux/tmux.conf
 !.config/lazygit/**
 !.config/starship.toml
