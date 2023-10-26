@@ -3,7 +3,7 @@ recentrepos:
 - /home/keinicke
 startuppopupversion: 5
 customcommandshistory:
-- git remote add origin git@github.com:Wayfarer98/.dofiles.git
 - git push -u origin main
+- git remote add origin git@github.com:Wayfarer98/.dofiles.git
 hidecommandlog: false
 ignorewhitespaceindiffview: false
