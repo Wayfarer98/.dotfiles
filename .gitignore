@@ -6,10 +6,21 @@
 !README.md
 
 # .config
-!.config/nvim/*
-!.config/tmux/tmux.conf
-!.config/lazygit/**
-!.config/starship.toml
+!.config
+.config/Cypress
+.config/github-copilot
+.config/matplotlib
+.config/yarn
+.config/tmux/plugins
 
 # hush login
 !.hustlogin
+
+# fonts
+!.fonts
+.fonts/.uuid
+
+# zsh
+!.zshrc
+!.zsh_aliases
+

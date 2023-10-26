@@ -1,0 +1,9 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/keinicke
+startuppopupversion: 5
+customcommandshistory:
+- git remote add origin git@github.com:Wayfarer98/.dofiles.git
+- git push -u origin main
+hidecommandlog: false
+ignorewhitespaceindiffview: false
