@@ -76,6 +76,7 @@ plugins=(
     zsh-syntax-highlighting
     docker
     zsh-exa
+    nvm
 )
 source $ZSH/oh-my-zsh.sh
 
