@@ -106,6 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Add true color
+export COLORTERM=truecolor
+
 source ~/.zsh_aliases
 
 export GPG_TTY=$(tty)
