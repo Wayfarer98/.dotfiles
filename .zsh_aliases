@@ -1,3 +1,4 @@
+# Project navigation aliases
 alias work="cd ~/Documents/Work"
 alias private="cd ~/Documents/Private"
 alias prsonal="cd ~/Documents/Work/prsonal; nvm use; source ./tools/environment/load-variables.sh"
@@ -18,3 +19,10 @@ alias lt='exa --tree --level=2 --icons'
 ## Sorts
 alias llm='exa -lbGF --git --sort=modified --icons'
 alias lld='exa -lbhHFGmuSa --group-directories-first --icons'
+
+
+# Tmux aliases
+alias ta='tmux attach'
+alias tas='tmux attach -t'
+alias tn='tmux new -s'
+
