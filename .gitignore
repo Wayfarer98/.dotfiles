@@ -23,6 +23,7 @@
 .config/mimeapps*
 .config/pulse
 .config/user-dirs*
+.config/go/*
 
 # hush login
 !.hustlogin
