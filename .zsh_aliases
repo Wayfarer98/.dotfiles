@@ -25,4 +25,6 @@ alias lld='exa -lbhHFGmuSa --group-directories-first --icons'
 alias ta='tmux attach'
 alias tas='tmux attach -t'
 alias tn='tmux new -s'
-
+alias tls='tmux ls'
+alias tka='tmux kill-session -a'
+alias tks='tmux kill-session -t'
