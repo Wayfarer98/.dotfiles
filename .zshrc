@@ -132,6 +132,7 @@ export FZF_ALT_C_COMMAND="find $HOME -type d"
 
 # Go
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
 
 eval "$(starship init zsh)"
 
