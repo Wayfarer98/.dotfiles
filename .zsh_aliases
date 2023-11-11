@@ -22,6 +22,7 @@ alias lld='exa -lbhHFGmuSa --group-directories-first --icons'
 
 
 # Tmux aliases
+alias tm='tmux new-session -A -s main'
 alias ta='tmux attach'
 alias tas='tmux attach -t'
 alias tn='tmux new -s'
