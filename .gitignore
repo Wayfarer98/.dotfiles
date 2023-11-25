@@ -12,7 +12,7 @@
 .config/matplotlib
 .config/yarn
 .config/tmux/plugins
-.config/lazygit
+.config/lazygit/*
 .config/.*
 .config/dconf
 .config/evolution
@@ -24,6 +24,7 @@
 .config/pulse
 .config/user-dirs*
 .config/go/*
+.config/JetBrains/*
 
 # hush login
 !.hustlogin
