@@ -25,6 +25,14 @@
 .config/user-dirs*
 .config/go/*
 .config/JetBrains/*
+.config/htop/*
+.config/yelp/*
+
+# misc files
+.config/GNOME-xdg-terminals.list
+.config/monitors.xml
+.config/monitors.xml~
+.config/xdg-terminals.list
 
 # hush login
 !.hustlogin
