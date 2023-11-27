@@ -141,3 +141,4 @@ fi
 
 eval "$(starship init zsh)"
 
+fpath+=${ZDOTDIR:-~}/.zsh_functions
