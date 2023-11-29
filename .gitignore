@@ -12,12 +12,6 @@
 !.config/alacritty
 !.config/tmux/tmux.conf
 
-# misc files
-.config/GNOME-xdg-terminals.list
-.config/monitors.xml
-.config/monitors.xml~
-.config/xdg-terminals.list
-
 # hush login
 !.hustlogin
 
