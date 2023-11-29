@@ -7,26 +7,10 @@
 
 # .config
 !.config
-.config/Cypress
-.config/github-copilot
-.config/matplotlib
-.config/yarn
-.config/tmux/plugins
-.config/lazygit/*
-.config/.*
-.config/dconf
-.config/evolution
-.config/gh
-.config/gnome-initial-setup-done
-.config/gtk*
-.config/ibus
-.config/mimeapps*
-.config/pulse
-.config/user-dirs*
-.config/go/*
-.config/JetBrains/*
-.config/htop/*
-.config/yelp/*
+.config/*
+!.config/nvim
+!.config/alacritty
+!.config/tmux/tmux.conf
 
 # misc files
 .config/GNOME-xdg-terminals.list
