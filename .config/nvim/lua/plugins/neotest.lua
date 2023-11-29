@@ -3,17 +3,16 @@ local M = {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "antoinemadec/FixCursorHold.nvim",
-        "rcasia/neotest-java",
+        "nvim-neotest/neotest-python"
     },
-    config = function ()
-        require("neotest").setup({
-            adapters = {
-                require("neotest-java")({
-                    ignore_wrapper = false,
-                })
-            }
-        })
-    end,
+    opts = {
+        adapters = {
+            require("neotest-python").setup({
+                args = { "--log-level", "DEBUG" },
+                runner = "pytest",
+            }),
+        }
+    },
 }
 
 return M
