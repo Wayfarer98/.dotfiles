@@ -1,5 +1,8 @@
 local M = {
 	"NvChad/nvim-colorizer.lua",
+	enabled = function()
+		return vim.g.vscode == nil
+	end,
 	event = "BufReadPre",
 	opts = {
 		filetypes = { "*" },

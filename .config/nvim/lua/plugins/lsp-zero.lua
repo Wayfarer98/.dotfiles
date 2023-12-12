@@ -1,5 +1,8 @@
 local M = {
     'VonHeikemen/lsp-zero.nvim',
+    enabled = function()
+        return vim.g.vscode == nil
+    end,
     branch = 'v3.x',
     lazy = true,
     config = false,

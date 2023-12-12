@@ -1,5 +1,8 @@
 local M = {
     "nvim-telescope/telescope-file-browser.nvim",
+    enabled = function()
+        return vim.g.vscode == nil
+    end,
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     opts = {
         extensions = {

@@ -8,27 +8,25 @@ end
 
 local M = {
     "hrsh7th/nvim-cmp",
-    event = { "BufReadPre", "InsertEnter" },
+    enabled = function()
+        return vim.g.vscode == nil
+    end,
+
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-path",
-        {
-            "zbirenbaum/copilot-cmp",
-            dependencies = "copilot.lua",
-            opts = {},
-            config = function(_, opts)
-                local copilot_cmp = require("copilot_cmp")
-                copilot_cmp.setup(opts)
-            end,
-        }
     },
     opts = function()
         local cmp = require("cmp")
         local lsp_kinds = require("utils").lsp_kinds
 
-
+        local has_words_before = function()
+            if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+            local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+            return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+        end
 
         local luasnip = require("luasnip")
 
@@ -63,7 +61,9 @@ local M = {
                 ["<C-e>"] = cmp.mapping.close(),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
-                        cmp.select_next_item()
+                        cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+                    elseif require("copilot.suggestion").is_visible() then
+                        require("copilot.suggestion").accept()
                     elseif luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
                     elseif has_words_before() then
@@ -81,10 +81,25 @@ local M = {
                         fallback()
                     end
                 end, { "i", "s" }),
+                ["<M-l>"] = cmp.mapping(function(fallback)
+                    if require("copilot.suggestion").is_visible() then
+                        require("copilot.suggestion").accept_line()
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                ["<M-d>"] = cmp.mapping(function(fallback)
+                    if require("copilot.suggestion").is_visible() then
+                        require("copilot.suggestion").dismiss()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' })
+
             }),
+
             sources = {
                 { name = "nvim_lsp" },
-                { name = "copilot" },
                 { name = "path" },
                 { name = "buffer" },
             },

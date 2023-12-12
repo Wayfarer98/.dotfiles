@@ -1,5 +1,8 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
+	enable = function()
+		return vim.g.vscode == nil
+	end,
 	build = ":TSUpdate",
 	event = "BufReadPost",
 	dependencies = {

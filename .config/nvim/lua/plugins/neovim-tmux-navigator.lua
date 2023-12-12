@@ -1,5 +1,8 @@
 local M = {
     'alexghergh/nvim-tmux-navigation',
+    enabled = function ()
+        return vim.g.vscode == nil
+    end,
     lazy = false,
     opts = {
         disable_when_zoomed = true,
