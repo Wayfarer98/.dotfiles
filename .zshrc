@@ -125,7 +125,7 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /usr/share/fzf/shell/key-bindings.zsh
+#source /usr/share/fzf/shell/key-bindings.zsh
 
 # Default fzf commands
 export FZF_DEFAULT_COMMAND="find $HOME"
