@@ -56,16 +56,6 @@ key = "Equals"
 mods = "Control"
 
 [[keyboard.bindings]]
-action = "IncreaseFontSize"
-key = "Add"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Subtract"
-mods = "Control"
-
-[[keyboard.bindings]]
 action = "DecreaseFontSize"
 key = "Minus"
 mods = "Control"
@@ -116,11 +106,12 @@ mods = "Shift"
 history = 5000
 
 [window]
-gtk_theme_variant = "dark"
+decorations_theme_variant = "dark"
 title = "Terminal"
 dynamic_title = true
 opacity = 0.90
 startup_mode = "Maximized"
+blur = true
 
 [window.class]
 general = "Alacritty"
