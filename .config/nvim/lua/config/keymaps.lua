@@ -1,5 +1,3 @@
-	
-
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines without spaces" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Keep cursor in the middle while scrolling down" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Kepp cursor in the middle while scrolling up" })
@@ -21,23 +19,23 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make current 
 vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>", { desc = "Ctrl+c behaves like Esc" })
 
 -- Qucikfix list navigation
-if vim.g.vscode == false then
+if vim.g.vscode == false or vim.g.vscode == nil then
 	vim.keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "Open quickfix list" })
 	vim.keymap.set("n", "<leader>qc", ":ccl<CR>", { desc = "Close quickfix list" })
 	vim.keymap.set("n", "<leader>qn", ":cnext<CR>", { desc = "Go to next item in the quickfix list" })
 	vim.keymap.set("n", "<leader>qp", ":cprev<CR>", { desc = "Go to the previous item in the quickfix list" })
-	
+
 	vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down" })
 	vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" })
 	vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 	vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-	
-	vim.keymap.set(
-	"n",
-	"<leader>pv",
-	"<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
-	{ desc = "Open file browser at current file's path" }
-)
 
+	vim.keymap.set(
+		"n",
+		"<leader>pv",
+		"<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
+		{ desc = "Open file browser at current file's path" }
+	)
 else
 end
+
