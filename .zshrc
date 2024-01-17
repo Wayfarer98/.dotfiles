@@ -136,6 +136,9 @@ export FZF_ALT_C_COMMAND="find $HOME -type d"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
+# Flutter
+export PATH=$PATH:$HOME/development/flutter/bin
+
 # Start tmux if not inside tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux new-session -A -s main
