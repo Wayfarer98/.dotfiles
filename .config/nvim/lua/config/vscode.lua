@@ -1,5 +1,11 @@
 local vscode = require("vscode-neovim")
 
+-- fzf
+vim.keymap.set('n', '<leader>sl', function() vscode.call('fzf-quick-open.runFzfSearch') end)
+vim.keymap.set('n', '<leader>sL', function() vscode.call('fzf-quick-open.runFzfSearchProjectRoot') end)
+vim.keymap.set('n', '<leader>sf', function() vscode.call('fzf-quick-open.runFzfFile') end)
+vim.keymap.set('n', '<leader>sg', function() vscode.call('fzf-quick-open.runFzfFileProjectRoot') end)
+
 -- Multiple cursors
 vim.keymap.set('n', '<C-d>', 'mciw*<Cmd>nohl<CR>', { remap = true })
 vim.keymap.set({ "x", "i" }, "<C-d>", function()
