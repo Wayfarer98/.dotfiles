@@ -1,4 +1,4 @@
-if vim.g.vscode == false then
+if not vim.g.vscode then
     vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 else
 end

@@ -1,4 +1,4 @@
-if vim.g.vscode == nil then
+if not vim.g.vscode then
     return {
         { "nvim-lua/plenary.nvim" },
         { "nvim-tree/nvim-web-devicons", opts = { default = true } },
