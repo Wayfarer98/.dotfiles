@@ -128,9 +128,9 @@ fi
 #source /usr/share/fzf/shell/key-bindings.zsh
 
 # Default fzf commands
-export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --color=always --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --type file --no-ignore --follow --hidden --color=always --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type d"
+export FZF_ALT_C_COMMAND="fd --type d --no-ignore"
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export FZF_DEFAULT_OPTS="--ansi"
 
