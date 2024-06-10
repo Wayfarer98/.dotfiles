@@ -149,3 +149,5 @@ fi
 eval "$(starship init zsh)"
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+[ -f "/home/keinicke/.ghcup/env" ] && . "/home/keinicke/.ghcup/env" # ghcup-env
