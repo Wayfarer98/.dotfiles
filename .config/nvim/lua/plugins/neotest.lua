@@ -8,7 +8,8 @@ local M = {
         "nvim-lua/plenary.nvim",
         "antoinemadec/FixCursorHold.nvim",
         "nvim-neotest/neotest-python",
-        "nvim-neotest/neotest-jest"
+        "nvim-neotest/neotest-jest",
+        "nvim-neotest/nvim-nio"
     },
     config = function()
         require("neotest").setup({

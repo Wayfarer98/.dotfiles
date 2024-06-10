@@ -5,8 +5,6 @@ local M = {
     end,
     event = 'BufReadPre',
     main = "ibl",
-    opts = {
-    },
 }
 
 return M

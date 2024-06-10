@@ -11,7 +11,7 @@ local M = {
     config = function()
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
-        local trouble = require("trouble.providers.telescope")
+        local trouble = require("trouble.sources.telescope")
         local telescope = require('telescope')
 
         telescope.setup({
@@ -23,10 +23,10 @@ local M = {
                         ["<C-j>"] = actions.move_selection_next,
                         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                         ["<C-e>"] = actions.smart_add_to_qflist,
-                        ["<C-t>"] = trouble.open_with_trouble
+                        ["<C-t>"] = trouble.open
                     },
                     n = {
-                        ["<C-t>"] = trouble.open_with_trouble
+                        ["<C-t>"] = trouble.open
                     }
                 }
             }
