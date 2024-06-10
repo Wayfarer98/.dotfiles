@@ -7,8 +7,8 @@ vim.keymap.set('n', '<leader>sf', function() vscode.call('fzf-quick-open.runFzfF
 vim.keymap.set('n', '<leader>sg', function() vscode.call('fzf-quick-open.runFzfFileProjectRoot') end)
 
 -- Multiple cursors
-vim.keymap.set('n', '<C-d>', 'mciw*<Cmd>nohl<CR>', { remap = true })
-vim.keymap.set({ "x", "i" }, "<C-d>", function()
+vim.keymap.set('n', '<C-e>', 'mciw*<Cmd>nohl<CR>', { remap = true })
+vim.keymap.set({ "x", "i" }, "<C-e>", function()
 	require("vscode-multi-cursor").addSelectionToNextFindMatch()
 end)
 
@@ -17,6 +17,13 @@ vim.keymap.set("n", "<leader>f", function() vscode.call("editor.action.formatDoc
 vim.keymap.set("x", "<leader>f", function() vscode.call("editor.action.formatSelection") end)
 vim.keymap.set("n", "u", function() vscode.call("undo") end)
 vim.keymap.set("n", "<C-r>", function() vscode.call("redo") end)
+
+-- Refactoring
+vim.keymap.set({ "n", "x" }, "<leader>r", function ()
+	vscode.with_insert(function()
+		vscode.action("editor.action.refactor")
+	end)
+end)
 
 -- Comments
 vim.keymap.set("n", "gcc", function() vscode.call("editor.action.commentLine") end)
