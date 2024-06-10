@@ -9,6 +9,13 @@ local M = {
 		},
 		highlight = {
 			backdrop = false
+		},
+		modes = {
+			char = {
+				highlight = {
+					backdrop = false
+				}
+			}
 		}
 	},
 	-- stylua: ignore
