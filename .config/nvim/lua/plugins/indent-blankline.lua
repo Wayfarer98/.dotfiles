@@ -1,10 +1,8 @@
 local M = {
+  { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    enabled = function()
-        return vim.g.vscode == nil
-    end,
-    event = 'BufReadPre',
-    main = "ibl",
+    main = 'ibl',
+    opts = {},
+  },
 }
-
 return M

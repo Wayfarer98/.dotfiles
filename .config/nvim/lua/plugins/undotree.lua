@@ -1,8 +1,8 @@
 local M = {
-	'mbbill/undotree',
-	enabled = function()
-		return vim.g.vscode == nil
-	end,
-
+  'mbbill/undotree',
+  cmd = 'UndotreeToggle',
+  keys = {
+    { '<leader>u', ':UndotreeToggle<CR>', desc = 'Toggle undo tree' },
+  },
 }
 return M

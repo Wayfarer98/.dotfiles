@@ -1,8 +1,10 @@
-require("config.options")
-require("config.keymaps")
-require("config.lazy")
-require("config.autocmds")
+-- Initial setup of options and keymaps
+require 'config.options'
+require 'config.keymaps'
+require 'config.autocommands'
 
-if vim.g.vscode then
-  require("config.vscode")
-end
+-- Setup of Lazy package manager
+require 'config.lazy'
+
+-- Setup after
+require 'after.options'
