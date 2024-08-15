@@ -9,6 +9,7 @@
 !.config
 .config/*
 !.config/nvim
+!.config/nvim-vscode
 !.config/alacritty
 !.config/tmux/tmux.conf
 
