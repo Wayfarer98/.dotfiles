@@ -1,7 +1,7 @@
 {
   "flash.nvim": { "branch": "main", "commit": "34c7be146a91fec3555c33fe89c7d643f6ef5cf1" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
-  "mini.nvim": { "branch": "main", "commit": "608e15779f3d672d30c8ee01ad8ff9cac9f7d723" },
+  "mini.nvim": { "branch": "main", "commit": "57e47cf7a2923684e7413989ab267ed9730e7d03" },
   "vscode-multi-cursor.nvim": { "branch": "main", "commit": "210d64a6d190383a81b8dcdf8779d357006f3a69" },
-  "vscode-neovim": { "branch": "master", "commit": "160d7aa03cd72c59ab1a1cfa6e40a591298a549a" }
+  "vscode-neovim": { "branch": "master", "commit": "e9d6584f324e6a5725305c27610dcbf722b1e9f8" }
 }
