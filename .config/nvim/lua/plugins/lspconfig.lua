@@ -13,6 +13,11 @@ local M = { -- LSP Configuration & Plugins
       opts = {},
       config = function()
         require('fidget').setup {
+          progress = {
+            suppress_on_insert = true,
+            ignore_done_already = true,
+            ignore_empty_message = true,
+          },
           notification = {
             window = {
               winblend = 0,
