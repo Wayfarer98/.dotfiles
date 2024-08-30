@@ -87,6 +87,14 @@ local M = { -- LSP Configuration & Plugins
         --  For example, in C this would take you to the header.
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+        map('[d', function()
+          vim.diagnostic.jump { count = -1, float = { border = 'rounded' } }
+        end, 'Jump to Previous Diagnostic')
+
+        map(']d', function()
+          vim.diagnostic.jump { count = 1, float = { border = 'rounded' } }
+        end, 'Jump to Previous Diagnostic')
+
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -105,6 +113,22 @@ local M = { -- LSP Configuration & Plugins
             callback = vim.lsp.buf.clear_references,
           })
 
+          vim.api.nvim_create_autocmd('CursorHold', {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = function()
+              local opts = {
+                focusable = false,
+                close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+                border = 'rounded',
+                source = 'always',
+                prefix = '',
+                scope = 'cursor',
+              }
+              vim.diagnostic.open_float(nil, opts)
+            end,
+          })
+
           vim.api.nvim_create_autocmd('LspDetach', {
             group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
             callback = function(event2)
@@ -120,6 +144,10 @@ local M = { -- LSP Configuration & Plugins
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')
         end
+
+        -- Change hover float to have borders
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
       end,
     })
 
@@ -143,22 +171,10 @@ local M = { -- LSP Configuration & Plugins
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
-      --
 
-      lua_ls = {
-        -- cmd = {...},
-        -- filetypes = { ...},
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      },
+      hls = {}, -- Haskell LSP
+      fsautocomplete = {}, -- F# LSP
+      lua_ls = {}, -- Lua LSP
     }
 
     -- Ensure the servers and tools above are installed
@@ -168,7 +184,10 @@ local M = { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
+      'stylua', -- Lua Formatter
+      'fantomas', -- F# Formatter
+      'ormolu', -- Haskell Formatter
+      'hlint', -- Haskell Linter
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
