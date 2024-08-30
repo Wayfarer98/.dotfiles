@@ -15,7 +15,7 @@ local M = { -- LSP Configuration & Plugins
         require('fidget').setup {
           notification = {
             window = {
-              winblend = 10,
+              winblend = 0,
             },
           },
         }
