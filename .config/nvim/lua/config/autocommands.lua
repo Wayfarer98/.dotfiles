@@ -19,3 +19,9 @@ vim.api.nvim_create_autocmd('BufRead', {
     end
   end,
 })
+
+-- Set correct filetype for fsharp files
+vim.api.nvim_create_autocmd({'BufNewFile','BufRead'}, {
+  pattern = '*.fs,*.fsx,*.fsi',
+  command = [[set filetype=fsharp]],
+})
