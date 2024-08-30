@@ -14,7 +14,7 @@ local M = { -- Useful plugin to show you pending keybinds.
       { '<leader>t', group = '[T]oggle' },
       { '<leader>x', group = '[X] Trouble' },
       { '<leader>m', group = '[M]eta Copilot Chat' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>h', group = '[H]arpoon', mode = { 'n', 'v' } },
     }
   end,
 }
