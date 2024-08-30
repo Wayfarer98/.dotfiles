@@ -26,6 +26,11 @@ local M = { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
+      fsx = { 'fantomas' },
+      fsi = { 'fantomas' },
+      fs = { 'fantomas' },
+      hs = { 'ormolu' },
+      lhs = { 'ormolu' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
