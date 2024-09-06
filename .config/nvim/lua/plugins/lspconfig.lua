@@ -122,6 +122,11 @@ local M = { -- LSP Configuration & Plugins
             buffer = event.buf,
             group = highlight_augroup,
             callback = function()
+              for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_config(winid).zindex then
+                  return
+                end
+              end
               local opts = {
                 focusable = false,
                 close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
