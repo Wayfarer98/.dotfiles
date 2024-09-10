@@ -24,11 +24,11 @@ local M = {
     { '<c-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },
     { '<leader>m', '', desc = '+ai', mode = { 'n', 'v' } },
     {
-      '<leader>ma',
+      '<leader>mt',
       function()
         return require('CopilotChat').toggle()
       end,
-      desc = 'Toggle (CopilotChat)',
+      desc = '[T]oggle (CopilotChat)',
       mode = { 'n', 'v' },
     },
     {
