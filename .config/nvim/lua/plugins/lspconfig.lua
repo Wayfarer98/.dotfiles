@@ -185,6 +185,7 @@ local M = { -- LSP Configuration & Plugins
       hls = {}, -- Haskell LSP
       fsautocomplete = {}, -- F# LSP
       lua_ls = {}, -- Lua LSP
+      marksman = {}, -- Markdown LSP
     }
 
     -- Ensure the servers and tools above are installed
@@ -198,6 +199,8 @@ local M = { -- LSP Configuration & Plugins
       'fantomas', -- F# Formatter
       'ormolu', -- Haskell Formatter
       'hlint', -- Haskell Linter
+      'markdownlint', -- Markdown Linter
+      'prettierd', -- Formatter { Markdown, }
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

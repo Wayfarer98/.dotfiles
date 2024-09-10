@@ -7,6 +7,7 @@ local M = {
 
       lint.linters_by_ft = {
         haskell = { 'hlint' },
+        markdown = { 'markdownlint' },
         json = nil,
         text = nil,
       }
