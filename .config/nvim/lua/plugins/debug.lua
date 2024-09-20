@@ -12,7 +12,7 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -54,6 +54,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         -- 'delve',
+        'netcoredbg',
       },
     }
 
@@ -91,6 +92,23 @@ return {
     --     detached = vim.fn.has 'win32' == 0,
     --   },
     -- }
+
+    dap.adapters.coreclr = {
+      type = 'executable',
+      command = '~/.local/share/nvim/mason/bin/netcoredbg',
+      args = { '--interpreter=vscode' },
+    }
+
+    dap.configurations.fsharp = {
+      {
+        type = 'coreclr',
+        name = 'Launch - netcoredbg',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        end,
+      },
+    }
 
     local sign = vim.fn.sign_define
 
