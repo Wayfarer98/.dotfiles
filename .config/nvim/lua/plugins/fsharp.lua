@@ -1,6 +1,5 @@
 local M = {
-  'adelarsq/neofsharp.vim',
-  enable = false,
+  'ionide/Ionide-vim',
 }
 
 return M

@@ -183,7 +183,7 @@ local M = { -- LSP Configuration & Plugins
       -- tsserver = {},
 
       hls = {}, -- Haskell LSP
-      fsautocomplete = {}, -- F# LSP
+      -- fsautocomplete = {}, -- F# LSP, but Ionide does this automatically
       lua_ls = {}, -- Lua LSP
       marksman = {}, -- Markdown LSP
     }
