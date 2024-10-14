@@ -1,5 +1,6 @@
 -- Initial setup of options and keymaps
 require 'config.options'
+require 'config.pluginOptions'
 require 'config.keymaps'
 require 'config.autocommands'
 

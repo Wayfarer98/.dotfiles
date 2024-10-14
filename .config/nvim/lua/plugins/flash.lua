@@ -36,7 +36,7 @@ local M = {
       desc = 'Remote Flash',
     },
     {
-      '<c-s>',
+      '<C-s>',
       mode = { 'c' },
       function()
         require('flash').toggle()

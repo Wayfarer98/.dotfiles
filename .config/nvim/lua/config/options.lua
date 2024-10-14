@@ -2,9 +2,6 @@
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 
--- Disable tab for copilot
-vim.g.copilot_no_tab_map = true
-
 -- Tab settings
 vim.o.expandtab = true
 

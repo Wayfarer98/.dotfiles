@@ -1,6 +1,6 @@
 local M = { -- Autocompletion
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
@@ -145,13 +145,19 @@ local M = { -- Autocompletion
 
     -- Setup for commandline
     cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline {
+        ['<C-y>'] = cmp.mapping.confirm { select = true },
+        ['<C-e>'] = cmp.mapping.close(),
+      },
       sources = {
         { name = 'buffer' },
       },
     })
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp.mapping.preset.cmdline {
+        ['<C-y>'] = cmp.mapping.confirm { select = true },
+        ['<C-e>'] = cmp.mapping.close(),
+      },
       sources = cmp.config.sources {
         { name = 'path' },
         { name = 'cmdline' },

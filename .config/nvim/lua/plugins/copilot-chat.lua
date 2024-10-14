@@ -1,12 +1,15 @@
 local M = {
   'CopilotC-Nvim/CopilotChat.nvim',
   branch = 'canary',
+  dependencies = {
+    { 'github/copilot.vim' },
+    { 'nvim-lua/plenary.nvim' },
+  },
   cmd = 'CopilotChat',
   opts = function()
     local user = vim.env.USER or 'User'
     user = user:sub(1, 1):upper() .. user:sub(2)
     return {
-      model = 'gpt-4',
       auto_insert_mode = true,
       show_help = true,
       question_header = '  ' .. user .. ' ',
@@ -28,7 +31,7 @@ local M = {
       function()
         return require('CopilotChat').toggle()
       end,
-      desc = '[T]oggle (CopilotChat)',
+      desc = '[M]Copilot chat [T]oggle',
       mode = { 'n', 'v' },
     },
     {
@@ -36,7 +39,7 @@ local M = {
       function()
         return require('CopilotChat').reset()
       end,
-      desc = 'Clear (CopilotChat)',
+      desc = '[M]Copilot chat [X]Clear',
       mode = { 'n', 'v' },
     },
     {
@@ -47,8 +50,16 @@ local M = {
           require('CopilotChat').ask(input)
         end
       end,
-      desc = 'Quick Chat (CopilotChat)',
+      desc = '[M]Copilot chat [Q]uick Chat',
       mode = { 'n', 'v' },
+    },
+    {
+      '<leader>mp',
+      function()
+        local actions = require 'CopilotChat.actions'
+        require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
+      end,
+      desc = '[M]Copilot chat [P]rompt actions',
     },
   },
   config = function(_, opts)
@@ -56,7 +67,7 @@ local M = {
     require('CopilotChat.integrations.cmp').setup()
 
     vim.api.nvim_create_autocmd('BufEnter', {
-      pattern = 'copilot-chat',
+      pattern = 'copilot-*',
       callback = function()
         vim.opt_local.relativenumber = false
         vim.opt_local.number = false

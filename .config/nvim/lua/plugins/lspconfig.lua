@@ -88,8 +88,6 @@ local M = { -- LSP Configuration & Plugins
         -- or a suggestion from your LSP for this to activate.
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         map('[d', function()
@@ -156,8 +154,8 @@ local M = { -- LSP Configuration & Plugins
         end
 
         -- Change hover float to have borders
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded', focusable = false })
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded', focusable = false })
       end,
     })
 
@@ -179,11 +177,11 @@ local M = { -- LSP Configuration & Plugins
       -- Some languages (like typescript) have entire language plugins that can be useful:
       --    https://github.com/pmizio/typescript-tools.nvim
       --
-      -- But for many setups, the LSP (`tsserver`) will work just fine
-      -- tsserver = {},
-
+      ts_ls = {}, -- TypeScript LSP
+      cssls = {}, -- CSS LSP
+      html = {}, -- HTML LSP
+      jsonls = {}, -- JSON LSP
       hls = {}, -- Haskell LSP
-      -- fsautocomplete = {}, -- F# LSP, but Ionide does this automatically
       lua_ls = {}, -- Lua LSP
       marksman = {}, -- Markdown LSP
     }
@@ -201,6 +199,8 @@ local M = { -- LSP Configuration & Plugins
       'hlint', -- Haskell Linter
       'markdownlint', -- Markdown Linter
       'prettierd', -- Formatter { Markdown, }
+      'isort', -- Python Formatter
+      'black', -- Python Formatter
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -235,11 +235,6 @@ local M = { -- LSP Configuration & Plugins
         },
       },
     }
-
-    -- for type, icon in pairs(signs) do
-    --   local hl = 'DiagnosticSign' .. type
-    --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    -- end
   end,
 }
 return M
