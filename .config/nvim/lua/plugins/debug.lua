@@ -1,6 +1,9 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
+    'nvim-telescope/telescope.nvim',
+    -- plenary
+    'nvim-lua/plenary.nvim',
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
@@ -20,10 +23,14 @@ return {
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
       { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>tb', dap.toggle_breakpoint, desc = 'Debug: [T]oggle [B]reakpoint' },
+      { '<F1>', dap.step_over, desc = 'Debug: Step Over' },
+      { '<F3>', dap.step_into, desc = 'Debug: Step Into' },
+      { '<F4>', dap.step_out, desc = 'Debug: Step Out' },
+      {
+        '<leader>tb',
+        dap.toggle_breakpoint,
+        desc = 'Debug: [T]oggle [B]reakpoint',
+      },
       {
         '<leader>B',
         function()
@@ -39,6 +46,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    local utils = require 'utils.utils'
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -60,24 +68,11 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    ---@diagnostic disable-next-line: missing-fields
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
     }
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
@@ -92,10 +87,11 @@ return {
     --     detached = vim.fn.has 'win32' == 0,
     --   },
     -- }
+    --
 
     dap.adapters.coreclr = {
       type = 'executable',
-      command = '~/.local/share/nvim/mason/bin/netcoredbg',
+      command = os.getenv 'HOME' .. '/.local/share/nvim/mason/bin/netcoredbg',
       args = { '--interpreter=vscode' },
     }
 
@@ -104,16 +100,30 @@ return {
         type = 'coreclr',
         name = 'Launch - netcoredbg',
         request = 'launch',
+        cwd = vim.fn.getcwd(),
         program = function()
-          return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          return utils.find_dll_for_selected_project()
         end,
+        args = {},
+        env = {},
       },
     }
 
     local sign = vim.fn.sign_define
 
-    sign('DapBreakpoint', { text = '●', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    sign('DapBreakpointCondition', { text = '●', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' })
-    sign('DapLogPoint', { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' })
+    sign(
+      'DapBreakpoint',
+      { text = '●', texthl = 'DapBreakpoint', linehl = '', numhl = '' }
+    )
+    sign('DapBreakpointCondition', {
+      text = '●',
+      texthl = 'DapBreakpointCondition',
+      linehl = '',
+      numhl = '',
+    })
+    sign(
+      'DapLogPoint',
+      { text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' }
+    )
   end,
 }

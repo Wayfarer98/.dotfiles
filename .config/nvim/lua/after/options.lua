@@ -7,4 +7,4 @@ vim.cmd [[
   highlight DiagnosticUnderlineWarn gui=undercurl
   highlight DiagnosticUnderlineInfo gui=undercurl
   highlight DiagnosticUnderlineHint gui=undercurl
-]]
+  "highlight! link DiagnosticUnnecessary None ]]
