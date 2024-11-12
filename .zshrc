@@ -142,9 +142,9 @@ export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/development/flutter/bin
 
 # Start tmux if not inside tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s main
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   exec tmux new-session -A -s main
+# fi
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
