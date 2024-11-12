@@ -12,6 +12,7 @@
 !.config/nvim-vscode
 !.config/alacritty
 !.config/tmux/tmux.conf
+!.config/wezterm
 
 # hush login
 !.hustlogin
