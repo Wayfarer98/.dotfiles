@@ -75,7 +75,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     docker
-    zsh-exa
+    eza
     nvm
 )
 source $ZSH/oh-my-zsh.sh
