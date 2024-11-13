@@ -13,6 +13,7 @@
 !.config/alacritty
 !.config/tmux/tmux.conf
 !.config/wezterm
+!.config/eza
 
 # hush login
 !.hustlogin
