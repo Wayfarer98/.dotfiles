@@ -6,28 +6,36 @@ local config = wezterm.config_builder()
 -- set the leader key
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
-local function create_workspace(name, directory)
-  if not directory then
-    directory = os.getenv 'HOME'
-  end
-  local tab1, _, window = mux.spawn_window {
+local function create_workspace(name, tabs)
+  local _, base_pane, window = mux.spawn_window {
     workspace = name,
-    cwd = directory,
   }
-  tab1:set_title 'Terminal'
-
-  local tab2, _, _ = window:spawn_tab {
-    cwd = directory,
-  }
-  tab2:set_title 'Code'
-  tab1:activate()
+  base_pane:send_text 'exit\n'
+  local base_tab = window:active_tab()
+  for i, tab in ipairs(tabs) do
+    local muxTab, muxPane, _ = window:spawn_tab {
+      cwd = tab.directory,
+    }
+    if i == 0 then
+      base_tab = muxTab
+    end
+    muxTab:set_title(tab.title)
+    if tab.command then
+      muxPane:send_text(tab.command .. '\n')
+    end
+  end
+  base_tab:activate()
   return window
 end
 
 wezterm.on('gui-startup', function()
-  local window = create_workspace('Main', os.getenv 'HOME')
-  create_workspace('AP', os.getenv 'HOME' .. '/Documents/Repos/Kandidat/AP')
-  create_workspace('TA', os.getenv 'HOME' .. '/Documents/Repos/TA')
+  local mainTabs = {
+    { title = 'Terminal', directory = os.getenv 'HOME' },
+    { title = 'Code', directory = os.getenv 'HOME', command = 'nvim' },
+  }
+  local window = create_workspace('Main', mainTabs)
+  create_workspace('AP', mainTabs)
+  create_workspace('TA', mainTabs)
   mux.set_active_workspace 'Main'
   window:gui_window():maximize()
 end)
@@ -105,6 +113,22 @@ config.keys = {
             },
             pane
           )
+        end
+      end),
+    },
+  },
+  {
+    key = ',',
+    mods = 'LEADER',
+    action = act.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Text = 'Name for tab: ' },
+      },
+      action = wezterm.action_callback(function(window, _, line)
+        if line then
+          local tab = window:active_tab()
+          tab:set_title(line)
         end
       end),
     },
