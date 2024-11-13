@@ -15,7 +15,8 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    -- 'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go'
+    'mfussenegger/nvim-dap-python',
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -63,6 +64,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         -- 'delve',
         'netcoredbg',
+        'python',
       },
     }
 
@@ -89,12 +91,43 @@ return {
     -- }
     --
 
+    -- Debud adapter for .NET Core
     dap.adapters.coreclr = {
       type = 'executable',
       command = os.getenv 'HOME' .. '/.local/share/nvim/mason/bin/netcoredbg',
       args = { '--interpreter=vscode' },
     }
 
+    dap.adapters.python = function(cb, config)
+      if config.request == 'attach' then
+        local port = (config.connect or config).port
+        local host = (config.connect or config).host or '127.0.0.1'
+
+        cb {
+          type = 'server',
+          port = assert(
+            port,
+            '`connect.port` is required for a python `attack` configuration'
+          ),
+          host = host,
+          options = {
+            source_filetype = 'python',
+          },
+        }
+      else
+        cb {
+          type = 'executable',
+          command = os.getenv 'HOME'
+            .. '/.local/share/nvim/mason/packages/debugpy/venv/bin/python',
+          args = { '-m', 'debugpy.adapter' },
+          options = {
+            source_filetype = 'python',
+          },
+        }
+      end
+    end
+
+    -- Debug configuration for F#
     dap.configurations.fsharp = {
       {
         type = 'coreclr',
@@ -106,6 +139,33 @@ return {
         end,
         args = {},
         env = {},
+      },
+    }
+
+    -- Debug configuration for Python
+    dap.configurations.python = {
+      {
+        -- The first three options are required by nvim-dap
+        type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+        request = 'launch',
+        name = 'Launch file',
+
+        -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+        program = '${file}', -- This configuration will launch the current file if used.
+        pythonPath = function()
+          -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+          -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+          -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+          local cwd = vim.fn.getcwd()
+          if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+            return cwd .. '/venv/bin/python'
+          elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+            return cwd .. '/.venv/bin/python'
+          else
+            return vim.fn.exepath 'python'
+          end
+        end,
       },
     }
 

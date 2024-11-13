@@ -1,6 +1,7 @@
 local M = {
   'alexghergh/nvim-tmux-navigation',
   lazy = false,
+  enabled = false,
   opts = {
     disable_when_zoomed = true,
     keybindings = {

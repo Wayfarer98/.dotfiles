@@ -252,6 +252,7 @@ local M = { -- LSP Configuration & Plugins
       hls = {}, -- Haskell LSP
       lua_ls = {}, -- Lua LSP
       marksman = {}, -- Markdown LSP
+      pyright = {}, -- Python LSP
     }
 
     -- Ensure the servers and tools above are installed
@@ -269,6 +270,7 @@ local M = { -- LSP Configuration & Plugins
       'prettierd', -- Formatter { Markdown, }
       'isort', -- Python Formatter
       'black', -- Python Formatter
+      'ruff', -- Pythong Linter
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
