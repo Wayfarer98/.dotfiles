@@ -4,7 +4,8 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 
 -- set the leader key
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader =
+  { key = 'a', mods = 'CTRL', timeout_milliseconds = math.maxinteger }
 
 local function create_workspace(name, tabs)
   local _, base_pane, window = mux.spawn_window {
@@ -28,6 +29,16 @@ local function create_workspace(name, tabs)
   return window
 end
 
+local function get_workspace_choices()
+  local workspaces = mux.get_workspace_names()
+  table.sort(workspaces)
+  local choices = {}
+  for _, name in ipairs(workspaces) do
+    table.insert(choices, { label = name, id = name })
+  end
+  return choices
+end
+
 wezterm.on('gui-startup', function()
   -- Main workspace
   local mainTabs = {
@@ -36,20 +47,49 @@ wezterm.on('gui-startup', function()
   }
   local window = create_workspace('Main', mainTabs)
 
-  -- PPD workspace
-  local PPD_tabs = {
+  -- Py workspace
+  local Py_tabs = {
     {
       title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/PPD',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
       command = 'source venv/bin/activate',
     },
     {
       title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/PPD',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
       command = 'source venv/bin/activate\nnvim',
     },
   }
-  create_workspace('PPD', PPD_tabs)
+  create_workspace('Py', Py_tabs)
+
+  -- DPP workspace
+  local DPP_tabs = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
+      command = 'nvim',
+    },
+  }
+  create_workspace('DPP', DPP_tabs)
+
+  -- VIP workspace
+  local VIP_tabs = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
+      command = 'source venv/bin/activate',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
+      command = 'source venv/bin/activate\nnvim',
+    },
+  }
+  create_workspace('VIP', VIP_tabs)
 
   -- TA workspace
   local TA_tabs = {
@@ -63,11 +103,20 @@ wezterm.on('gui-startup', function()
       command = 'nvim',
     },
   }
-  create_workspace('TA', mainTabs)
+  create_workspace('TA', TA_tabs)
 
   -- Start out in the 'Main' workspace and maximize the window
   mux.set_active_workspace 'Main'
   window:gui_window():maximize()
+  wezterm.reload_configuration()
+end)
+
+wezterm.on('update-right-status', function(window, pane)
+  if window:leader_is_active() then
+    window:set_right_status 'LEADER'
+  else
+    window:set_right_status ''
+  end
 end)
 
 -- set the colorscheme and appearance
@@ -131,8 +180,6 @@ local function split_nav(resize_or_move, key)
   }
 end
 
-local nav_keys = {}
-
 -- set keybinds
 config.keys = {
   -- Pane navigation and splitting
@@ -183,7 +230,19 @@ config.keys = {
   {
     key = 's',
     mods = 'LEADER',
-    action = act.ShowLauncherArgs { flags = 'WORKSPACES' },
+    action = act.InputSelector {
+      action = wezterm.action_callback(function(_, _, id, label)
+        if not id and not label then
+          wezterm.log_info 'Cancelled workspace selection'
+        else
+          wezterm.log_info('Switching to workspace: ' .. id)
+          mux.set_active_workspace(id)
+        end
+      end),
+      title = 'Workspace selector',
+      description = "Select workspace to switch to. Press '/' to fuzzy search. Press 'ESC' to cancel.",
+      choices = get_workspace_choices(),
+    },
   },
   {
     key = 'n',
@@ -201,6 +260,7 @@ config.keys = {
             },
             pane
           )
+          wezterm.reload_configuration()
         end
       end),
     },
@@ -220,6 +280,12 @@ config.keys = {
         end
       end),
     },
+  },
+  -- Quit the application
+  {
+    key = 'q',
+    mods = 'LEADER|CTRL',
+    action = act.QuitApplication,
   },
 }
 
