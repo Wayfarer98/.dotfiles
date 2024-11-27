@@ -13,7 +13,8 @@ local M = { -- Useful plugin to show you pending keybinds.
       { '<leader>w', group = '[W]orkspace' },
       { '<leader>t', group = '[T]oggle' },
       { '<leader>x', group = '[X] Trouble' },
-      { '<leader>m', group = '[M]eta Copilot Chat' },
+      { '<leader>a', group = '[A]I' },
+      { 'gm', group = '+Copilot chat' },
       { '<leader>h', group = '[H]arpoon', mode = { 'n', 'v' } },
     }
   end,
