@@ -33,12 +33,12 @@ local M = { -- Autoformat
       hs = { 'ormolu' },
       lhs = { 'ormolu' },
       -- You can use a sub-list to tell conform to run *until* a formatter is found
-      javascript = { { 'prettierd', 'prettier' } },
-      typescript = { { 'prettierd', 'prettier' } },
-      typescriptreact = { { 'prettierd', 'prettier' } },
-      json = { { 'prettierd', 'prettier' } },
-      yaml = { { 'prettierd', 'prettier' } },
-      markdown = { { 'prettierd', 'prettier' } },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'prettierd', 'prettier', stop_after_first = true },
+      yaml = { 'prettierd', 'prettier', stop_after_first = true },
+      markdown = { 'prettierd', 'prettier', stop_after_first = true },
       -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'black' },
     },
