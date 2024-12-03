@@ -16,7 +16,7 @@ local prompts = {
 
 local M = {
   'CopilotC-Nvim/CopilotChat.nvim',
-  branch = 'canary',
+  branch = 'main',
   dependencies = {
     { 'github/copilot.vim' },
     { 'nvim-telescope/telescope.nvim' },
@@ -62,7 +62,7 @@ local M = {
       show_system_promp = {
         normal = 'gmp',
       },
-      show_user_selection = {
+      show_context = {
         normal = 'gms',
       },
       show_help = {
