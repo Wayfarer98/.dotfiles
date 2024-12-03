@@ -47,17 +47,31 @@ wezterm.on('gui-startup', function()
   }
   local window = create_workspace('Main', mainTabs)
 
+  -- Speciale workspace
+  local specialeTabs = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
+      command = 'nvim',
+    },
+  }
+  create_workspace('Speciale', specialeTabs)
+
   -- Py workspace
   local Py_tabs = {
     {
       title = 'Terminal',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
-      command = 'source venv/bin/activate',
+      command = 'source venv/bin/activate\nclear',
     },
     {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
-      command = 'source venv/bin/activate\nnvim',
+      command = 'source venv/bin/activate\nclear\nnvim',
     },
   }
   create_workspace('Py', Py_tabs)
@@ -81,12 +95,12 @@ wezterm.on('gui-startup', function()
     {
       title = 'Terminal',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
-      command = 'source venv/bin/activate',
+      command = 'source venv/bin/activate\nclear',
     },
     {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
-      command = 'source venv/bin/activate\nnvim',
+      command = 'source venv/bin/activate\nclear\nnvim',
     },
   }
   create_workspace('VIP', VIP_tabs)
@@ -104,6 +118,21 @@ wezterm.on('gui-startup', function()
     },
   }
   create_workspace('TA', TA_tabs)
+
+  -- Advent of Code workspace
+  local AOC_tabs = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
+      command = 'source venv/bin/activate\nclear',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
+      command = 'source venv/bin/activate\nclear\nnvim',
+    },
+  }
+  create_workspace('AOC', AOC_tabs)
 
   -- Start out in the 'Main' workspace and maximize the window
   mux.set_active_workspace 'Main'
