@@ -110,11 +110,12 @@ wezterm.on('gui-startup', function()
     {
       title = 'Terminal',
       directory = os.getenv 'HOME' .. '/Documents/Repos/TA',
+      command = 'source staffeli_nt/env/bin/activate\nclear',
     },
     {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/TA',
-      command = 'nvim',
+      command = 'source staffeli_nt/env/bin/activate\nclear\nnvim',
     },
   }
   create_workspace('TA', TA_tabs)
@@ -227,6 +228,8 @@ config.keys = {
     mods = 'LEADER',
     action = act.CloseCurrentPane { confirm = false },
   },
+  -- Windows
+  { key = 'w', mods = 'LEADER', action = wezterm.action.SpawnWindow },
   -- move between split panes
   split_nav('move', 'h'),
   split_nav('move', 'j'),
