@@ -1,4 +1,4 @@
-local M = { -- Fuzzy Finder (files, lsp, etc)
+local M = {
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
   branch = '0.1.x',
@@ -6,35 +6,18 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     'nvim-lua/plenary.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-
-      build = 'make',
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
-
-    -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
     local actions = require 'telescope.actions'
     local trouble = require 'trouble.sources.telescope'
-    --  - Insert mode: <c-/>
-    --  - Normal mode: ?
-    -- This opens a window that shows you all of the keymaps for the current
-    -- Telescope picker. This is really useful to discover what Telescope can
-    -- do as well as how to actually do it!
 
     require('telescope').setup {
-      -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
-      --
       defaults = {
         mappings = {
           i = {
-            ['<C-k>'] = actions.move_selection_previous,
-            ['<C-j>'] = actions.move_selection_next,
             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
 
             ['<C-e>'] = actions.smart_add_to_qflist,
@@ -45,12 +28,6 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
             ['<C-t>'] = trouble.open,
             ['<C-a>'] = trouble.add,
           },
-        },
-      },
-      -- pickers = {}
-      extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
         },
       },
     }
