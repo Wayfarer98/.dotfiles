@@ -1,5 +1,6 @@
 local M = { -- Autocompletion
   'hrsh7th/nvim-cmp',
+  enabled = true,
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
