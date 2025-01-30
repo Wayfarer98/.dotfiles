@@ -62,19 +62,19 @@ wezterm.on('gui-startup', function()
   create_workspace('Speciale', specialeTabs)
 
   -- Py workspace
-  local Py_tabs = {
+  local Budget_tabs = {
     {
       title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Budget',
       command = 'source venv/bin/activate\nclear',
     },
     {
       title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Py',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Budget',
       command = 'source venv/bin/activate\nclear\nnvim',
     },
   }
-  create_workspace('Py', Py_tabs)
+  create_workspace('Budget', Budget_tabs)
 
   -- DPP workspace
   local DPP_tabs = {
@@ -89,21 +89,6 @@ wezterm.on('gui-startup', function()
     },
   }
   create_workspace('DPP', DPP_tabs)
-
-  -- VIP workspace
-  local VIP_tabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
-      command = 'source venv/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/VIP',
-      command = 'source venv/bin/activate\nclear\nnvim',
-    },
-  }
-  create_workspace('VIP', VIP_tabs)
 
   -- TA workspace
   local TA_tabs = {
