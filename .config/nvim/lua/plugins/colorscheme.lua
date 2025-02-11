@@ -22,6 +22,7 @@ local M = {
       mini = {
         enabled = true,
       },
+      noice = true,
     },
     transparent_background = true,
   },
