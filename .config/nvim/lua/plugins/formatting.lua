@@ -41,6 +41,9 @@ local M = { -- Autoformat
       markdown = { 'prettierd', 'prettier', stop_after_first = true },
       -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'black' },
+      c = { 'clang-format' },
+      cpp = { 'clang-format' },
+      cmake = { 'cmake_format' },
     },
   },
 }
