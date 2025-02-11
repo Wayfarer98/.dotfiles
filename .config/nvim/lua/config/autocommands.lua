@@ -37,3 +37,26 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     vim.cmd [[setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab commentstring=//%s]]
   end,
 })
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.c,*.cpp,*.h,*.hpp',
+  callback = function()
+    vim.cmd [[setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab commentstring=//%s]]
+  end,
+})
+
+-- Close floating window with Esc
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  pattern = '*',
+  callback = function()
+    if vim.api.nvim_win_get_config(0).relative ~= '' then
+      vim.api.nvim_buf_set_keymap(
+        0,
+        'n',
+        '<Esc>',
+        '<cmd>close<CR>',
+        { noremap = true, silent = true, nowait = true }
+      )
+    end
+  end,
+})
