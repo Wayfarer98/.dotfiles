@@ -11,6 +11,9 @@ local M = {
         python = { 'ruff' },
         json = {},
         text = {},
+        cpp = { 'cpplint' },
+        c = { 'cpplint' },
+        cmake = { 'cmakelint' },
       }
 
       -- Create autocommand which carries out the actual linting
