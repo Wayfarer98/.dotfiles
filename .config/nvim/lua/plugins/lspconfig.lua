@@ -6,27 +6,6 @@ local M = { -- LSP Configuration & Plugins
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    {
-      'j-hui/fidget.nvim',
-      opts = {},
-      config = function()
-        require('fidget').setup {
-          progress = {
-            suppress_on_insert = true,
-            ignore_done_already = true,
-            ignore_empty_message = true,
-          },
-          notification = {
-            window = {
-              winblend = 0,
-            },
-          },
-        }
-      end,
-    },
-
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     {
@@ -208,14 +187,29 @@ local M = { -- LSP Configuration & Plugins
           end, '[T]oggle Inlay [H]ints')
         end
 
+        -- Show signature help
+        if
+          client
+          and client.supports_method(
+            vim.lsp.protocol.Methods.textDocument_signatureHelp
+          )
+        then
+          vim.keymap.set(
+            'i',
+            '<C-k>',
+            vim.lsp.buf.signature_help,
+            { buffer = event.buf, desc = 'LSP: Show Signature Help' }
+          )
+        end
+
         -- Change hover float to have borders
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
           vim.lsp.handlers.hover,
-          { border = 'rounded', focusable = false }
+          { border = 'rounded', focusable = true }
         )
         vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
           vim.lsp.handlers.signature_help,
-          { border = 'rounded', focusable = false }
+          { border = 'rounded', focusable = true }
         )
       end,
     })
@@ -246,7 +240,13 @@ local M = { -- LSP Configuration & Plugins
       html = {}, -- HTML LSP
       jsonls = {}, -- JSON LSP
       hls = {}, -- Haskell LSP
-      lua_ls = {}, -- Lua LSP
+      lua_ls = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' },
+          },
+        },
+      }, -- Lua LSP
       marksman = {}, -- Markdown LSP
       pyright = {}, -- Python LSP
       clangd = {
@@ -269,8 +269,8 @@ local M = { -- LSP Configuration & Plugins
           )(fname) or require('lspconfig.util').root_pattern(
             'compile_commands.json',
             'compile_flags.txt'
-          )(fname) or require('lspconfig.util').find_git_ancestor(
-            fname
+          )(fname) or vim.fs.dirname(
+            vim.fs.find('.git', { path = fname, upward = true })[1]
           )
         end,
         capabilities = {
@@ -291,6 +291,7 @@ local M = { -- LSP Configuration & Plugins
           clangdFileStatus = true,
         },
       },
+      cmake = {},
     }
 
     -- Ensure the servers and tools above are installed
@@ -309,6 +310,10 @@ local M = { -- LSP Configuration & Plugins
       'isort', -- Python Formatter
       'black', -- Python Formatter
       'ruff', -- Pythong Linter
+      'clang-format', -- C/C++ Formatter
+      'cpplint', -- C/C++ Linter
+      'cmakelint', -- CMake Linter
+      'cmakelang', -- Needed for cmake-format apparently
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -328,6 +333,8 @@ local M = { -- LSP Configuration & Plugins
           require('lspconfig')[server_name].setup(server)
         end,
       },
+      ensure_installed = {},
+      automatic_installation = false,
     }
 
     -- Setup cool lsp signs
