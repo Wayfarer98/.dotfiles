@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 local M = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
@@ -207,10 +208,10 @@ local M = { -- LSP Configuration & Plugins
           vim.lsp.handlers.hover,
           { border = 'rounded', focusable = true }
         )
-        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-          vim.lsp.handlers.signature_help,
-          { border = 'rounded', focusable = true }
-        )
+        vim.lsp.handlers['textDocument/signatureHelp'] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, {
+            border = 'rounded',
+          })
       end,
     })
 
