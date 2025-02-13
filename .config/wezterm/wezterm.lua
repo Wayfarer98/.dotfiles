@@ -146,6 +146,9 @@ config.window_decorations = 'RESIZE'
 config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
 config.font_size = 14
 
+-- Refresh rate
+config.max_fps = 240
+
 -- setup neovim navigation and pane resizing integrations
 local function is_vim(pane)
   local process_info = pane:get_foreground_process_info()
