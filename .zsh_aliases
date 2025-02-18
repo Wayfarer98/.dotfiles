@@ -10,3 +10,4 @@ alias tks='tmux kill-session -t'
 # nvim aliases
 alias vim='nvim'
 alias vsvim='NVIM_APPNAME=nvim-vscode nvim'
+alias minivim='NVIM_APPNAME=nvim-mini nvim'
