@@ -110,6 +110,12 @@ local M = {
       color = { fg = C.mantle, bg = C.maroon },
     }
 
+    local progress = {
+      'progress',
+      separator = { left = '', right = '' },
+      color = { fg = C.text, bg = C.surface0 },
+    }
+
     return {
       options = {
         theme = 'catppuccin',
@@ -132,6 +138,7 @@ local M = {
           diff,
           space,
           location,
+          progress,
         },
         lualine_x = { space },
         lualine_y = { space },
