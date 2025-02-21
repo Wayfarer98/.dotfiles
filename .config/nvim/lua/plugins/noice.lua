@@ -1,10 +1,13 @@
 local M = {
   'folke/noice.nvim',
-  event = 'VeryLazy',
+  event = 'BufRead',
+  enabled = true,
   opts = {
     lsp = {
       override = {
-        ['vim.entry.get_documentation'] = true,
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+        ['vim.lsp.util.stylize_markdown'] = true,
+        ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
       },
       hover = {
         enabled = false,
@@ -15,9 +18,11 @@ local M = {
     },
     presets = {
       bottom_search = true,
-      command_palette = true,
       long_message_to_split = true,
       lsp_doc_border = true,
+    },
+    cmdline = {
+      view = 'cmdline',
     },
   },
   dependencies = {
