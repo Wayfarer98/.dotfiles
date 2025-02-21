@@ -35,30 +35,6 @@ vim.keymap.set(
 -- Remove highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set(
-  'n',
-  '<leader>q',
-  vim.diagnostic.setloclist,
-  { desc = 'Open diagnostic [Q]uickfix list' }
-)
-
--- Move lines up and down
-vim.keymap.set(
-  'x',
-  '<A-j>',
-  ":m '>+1<CR>gv=gv",
-  { desc = 'Move selected lines down' }
-)
-vim.keymap.set(
-  'x',
-  '<A-k>',
-  ":m '<-2<CR>gv=gv",
-  { desc = 'Move selected lines up' }
-)
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { desc = 'Move line down' })
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move line up' })
-
 -- Indent lines but stay in visual mode
 vim.keymap.set('x', '<', '<gv', { desc = 'Indent selected lines left' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Indent selected lines right' })
