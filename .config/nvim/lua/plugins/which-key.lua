@@ -6,16 +6,16 @@ local M = { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     require('which-key').add {
-      { '<leader>c', group = '[C]ode' },
-      { '<leader>d', group = '[D]ocument' },
-      { '<leader>r', group = '[R]ename' },
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>w', group = '[W]orkspace' },
-      { '<leader>t', group = '[T]oggle' },
-      { '<leader>x', group = '[X] Trouble' },
-      { '<leader>a', group = '[A]I' },
+      { '<leader>c', group = 'Code' },
+      { '<leader>d', group = 'Document' },
+      { '<leader>r', group = 'Rename' },
+      { '<leader>s', group = 'Search' },
+      { '<leader>w', group = 'Workspace' },
+      { '<leader>t', group = 'Toggle' },
+      { '<leader>x', group = 'Trouble' },
+      { '<leader>a', group = 'AI' },
       { 'gm', group = '+Copilot chat' },
-      { '<leader>h', group = '[H]arpoon', mode = { 'n', 'v' } },
+      { '<leader>h', group = 'Harpoon', mode = { 'n', 'v' } },
     }
   end,
 }
