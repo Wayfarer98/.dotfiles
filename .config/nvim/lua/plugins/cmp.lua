@@ -29,43 +29,6 @@ local M = { -- Autocompletion
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
-    local lsp_kinds = {
-      Text = ' ',
-      Method = ' ',
-      Function = ' ',
-      Constructor = ' ',
-      Field = ' ',
-      Variable = ' ',
-      Class = ' ',
-      Interface = ' ',
-      Module = ' ',
-      Property = ' ',
-      Unit = ' ',
-      Value = ' ',
-      Enum = ' ',
-      Keyword = ' ',
-      Snippet = ' ',
-      Color = ' ',
-      File = ' ',
-      Reference = ' ',
-      Folder = ' ',
-      EnumMember = ' ',
-      Constant = ' ',
-      Struct = ' ',
-      Event = ' ',
-      Operator = ' ',
-      TypeParameter = ' ',
-      Copilot = ' ',
-      Namespace = ' ',
-      Package = ' ',
-      String = ' ',
-      Number = ' ',
-      Boolean = ' ',
-      Array = ' ',
-      Object = ' ',
-      Key = ' ',
-      Null = ' ',
-    }
 
     luasnip.config.setup {}
 
@@ -76,20 +39,10 @@ local M = { -- Autocompletion
         end,
       },
       formatting = {
-        format = function(entry, vim_item)
-          if vim.tbl_contains({ 'path' }, entry.source.name) then
-            local icon, hl_group = require('nvim-web-devicons').get_icon(
-              entry:completion_item().label
-            )
-            if icon then
-              vim_item.kind = icon
-              vim_item.kind_hl_group = hl_group
-              return vim_item
-            end
-          end
-          vim_item.kind = (lsp_kinds[vim_item.kind] or '')
-            .. ' '
-            .. vim_item.kind
+        format = function(_, vim_item)
+          local icon, hl = require('mini.icons').get('lsp', vim_item.kind)
+          vim_item.kind = icon .. ' ' .. vim_item.kind
+          vim_item.kind_hl_group = hl
           return vim_item
         end,
         fields = { 'abbr', 'kind', 'menu' },
