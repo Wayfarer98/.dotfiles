@@ -2,32 +2,11 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local mux = wezterm.mux
 local config = wezterm.config_builder()
+local workspaceModules = require 'workspaces'
 
 -- set the leader key
 config.leader =
   { key = 'a', mods = 'CTRL', timeout_milliseconds = math.maxinteger }
-
-local function create_workspace(name, tabs)
-  local _, base_pane, window = mux.spawn_window {
-    workspace = name,
-  }
-  base_pane:send_text 'exit\n'
-  local base_tab = window:active_tab()
-  for i, tab in ipairs(tabs) do
-    local muxTab, muxPane, _ = window:spawn_tab {
-      cwd = tab.directory,
-    }
-    if i == 0 then
-      base_tab = muxTab
-    end
-    muxTab:set_title(tab.title)
-    if tab.command then
-      muxPane:send_text(tab.command .. '\n')
-    end
-  end
-  base_tab:activate()
-  return window
-end
 
 local function get_workspace_choices()
   local workspaces = mux.get_workspace_names()
@@ -40,90 +19,13 @@ local function get_workspace_choices()
 end
 
 wezterm.on('gui-startup', function()
-  -- Main workspace
-  local mainTabs = {
-    { title = 'Terminal', directory = os.getenv 'HOME' },
-    { title = 'Code', directory = os.getenv 'HOME', command = 'nvim' },
-  }
-  local window = create_workspace('Main', mainTabs)
-
-  -- Speciale workspace
-  local specialeTabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
-      command = 'source venv/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
-      command = 'source venv/bin/activate\nclear\nnvim',
-    },
-  }
-  create_workspace('Speciale', specialeTabs)
-
-  -- Py workspace
-  local Budget_tabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Budget',
-      command = 'source venv/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Budget',
-      command = 'source venv/bin/activate\nclear\nnvim',
-    },
-  }
-  create_workspace('Budget', Budget_tabs)
-
-  -- DPP workspace
-  local DPP_tabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
-      command = 'nvim',
-    },
-  }
-  create_workspace('DPP', DPP_tabs)
-
-  -- TA workspace
-  local TA_tabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/TA',
-      command = 'source staffeli_nt/env/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/TA',
-      command = 'source staffeli_nt/env/bin/activate\nclear\nnvim',
-    },
-  }
-  create_workspace('TA', TA_tabs)
-
-  -- Advent of Code workspace
-  local AOC_tabs = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
-      command = 'source venv/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
-      command = 'source venv/bin/activate\nclear\nnvim',
-    },
-  }
-  create_workspace('AOC', AOC_tabs)
-
+  -- Create the workspaces
+  local window = workspaceModules.initializeWorkspaces()
   -- Start out in the 'Main' workspace and maximize the window
   mux.set_active_workspace 'Main'
-  window:gui_window():maximize()
+  if window then
+    window:gui_window():maximize()
+  end
   wezterm.reload_configuration()
 end)
 
