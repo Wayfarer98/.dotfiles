@@ -2,20 +2,12 @@ return {
   'mfussenegger/nvim-dap',
   dependencies = {
     'nvim-telescope/telescope.nvim',
-    -- plenary
     'nvim-lua/plenary.nvim',
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
-    -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
-
-    -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
-    -- Add your own debuggers here
-    -- 'leoluz/nvim-dap-go'
     'mfussenegger/nvim-dap-python',
   },
   keys = function(_, keys)
@@ -28,7 +20,7 @@ return {
       { '<F3>', dap.step_into, desc = 'Debug: Step Into' },
       { '<F4>', dap.step_out, desc = 'Debug: Step Out' },
       {
-        '<leader>tb',
+        '<leader>bt',
         dap.toggle_breakpoint,
         desc = 'Debug: [T]oggle [B]reakpoint',
       },
@@ -50,46 +42,28 @@ return {
     local utils = require 'utils.utils'
 
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_installation = true,
+      automatic_installation = false,
 
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
       handlers = {},
 
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        -- 'delve',
         'netcoredbg',
         'python',
+        'cpptools',
       },
     }
 
-    -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     ---@diagnostic disable-next-line: missing-fields
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      icons = { expanded = '', collapsed = '', current_frame = '' },
     }
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
-
-    -- Install golang specific config
-    -- require('dap-go').setup {
-    --   delve = {
-    --     -- On Windows delve must be run attached or it crashes.
-    --     -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-    --     detached = vim.fn.has 'win32' == 0,
-    --   },
-    -- }
-    --
 
     -- Debud adapter for .NET Core
     dap.adapters.coreclr = {
@@ -107,7 +81,7 @@ return {
           type = 'server',
           port = assert(
             port,
-            '`connect.port` is required for a python `attack` configuration'
+            '`connect.port` is required for a python `attach` configuration'
           ),
           host = host,
           options = {
@@ -126,6 +100,12 @@ return {
         }
       end
     end
+
+    dap.adapters.cppdbg = {
+      id = 'cppdbg',
+      type = 'executable',
+      command = os.getenv 'HOME' .. '/.local/share/nvim/mason/bin/OpenDebugAD7',
+    }
 
     -- Debug configuration for F#
     dap.configurations.fsharp = {
@@ -166,6 +146,25 @@ return {
             return vim.fn.exepath 'python'
           end
         end,
+      },
+    }
+
+    dap.configurations.cpp = {
+      {
+        name = 'Launch file',
+        type = 'cppdbg',
+        request = 'launch',
+        program = function()
+          return vim.fn.input(
+            'Path to executable: ',
+            vim.fn.getcwd() .. '/',
+            'file'
+          )
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+        runInTerminal = true,
       },
     }
 
