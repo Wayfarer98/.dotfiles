@@ -315,6 +315,7 @@ local M = { -- LSP Configuration & Plugins
       'cpplint', -- C/C++ Linter
       'cmakelint', -- CMake Linter
       'cmakelang', -- Needed for cmake-format apparently
+      'cpptools', -- debugger, apparently cannot be installed from dap ensure installed
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
