@@ -50,6 +50,10 @@ local workspaces = {
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
     },
     {
+      title = 'SSH',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
+    },
+    {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
       command = 'nvim',
@@ -77,6 +81,19 @@ local workspaces = {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
       command = 'source venv/bin/activate\nclear\nnvim',
+    },
+  },
+  CS = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME'
+        .. '/Documents/Repos/Roadmap/CS/DataStructures',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME'
+        .. '/Documents/Repos/Roadmap/CS/DataStructures',
+      command = 'nvim',
     },
   },
 }
