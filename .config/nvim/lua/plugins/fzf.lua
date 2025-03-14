@@ -214,7 +214,7 @@ local M = {
       },
       {
         '<leader>sm',
-        fzf.builtin,
+        fzf.manpages,
         desc = 'Search manpages',
       },
 
