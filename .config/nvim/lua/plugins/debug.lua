@@ -1,7 +1,6 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',

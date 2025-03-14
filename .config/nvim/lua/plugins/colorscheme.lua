@@ -19,9 +19,6 @@ local M = {
       mason = true,
       treesitter = true,
       which_key = true,
-      telescope = {
-        enabled = true,
-      },
       mini = {
         enabled = true,
         indentscope_color = 'lavender',

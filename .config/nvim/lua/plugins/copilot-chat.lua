@@ -19,7 +19,6 @@ local M = {
   branch = 'main',
   dependencies = {
     { 'github/copilot.vim' },
-    { 'nvim-telescope/telescope.nvim' },
     { 'nvim-lua/plenary.nvim' },
   },
   opts = {
@@ -115,30 +114,6 @@ local M = {
   end,
   event = 'VeryLazy',
   keys = {
-    -- show prompt actions with telescope
-    {
-      '<leader>ap',
-      function()
-        local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.telescope').pick(
-          actions.prompt_actions()
-        )
-      end,
-      desc = 'CopilotChat - Prompt actions',
-    },
-    {
-      '<leader>ap',
-      function()
-        local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.telescope').pick(
-          actions.prompt_actions {
-            selection = require('CopilorChat.select').visual,
-          }
-        )
-      end,
-      mode = 'x',
-      desc = 'CopilotChat - Prompt actions (visual)',
-    },
     -- Code related commands
     {
       '<leader>ae',
