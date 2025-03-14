@@ -162,7 +162,7 @@ local M = { -- LSP Configuration & Plugins
           client
           and client.supports_method(
             vim.lsp.protocol.Methods.textDocument_inlayHint,
-            vim.api.nvim_get_current_buf
+            vim.api.nvim_get_current_buf()
           )
         then
           map('<leader>th', function()
@@ -177,7 +177,7 @@ local M = { -- LSP Configuration & Plugins
           client
           and client.supports_method(
             vim.lsp.protocol.Methods.textDocument_signatureHelp,
-            vim.api.nvim_get_current_buf
+            vim.api.nvim_get_current_buf()
           )
         then
           vim.keymap.set('i', '<C-k>', function()
