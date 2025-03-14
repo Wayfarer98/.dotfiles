@@ -50,9 +50,9 @@ local M = {
       desc = 'Quickfix List (Trouble) toggle',
     },
     {
-      '<leader>xt',
-      '<cmd>Trouble telescope toggle focus=true<cr>',
-      desc = 'Telescope (Trouble) toggle',
+      '<leader>xf',
+      '<cmd>Trouble fzf toggle focus=true<cr>',
+      desc = 'fzf (Trouble) toggle',
     },
   },
 }
