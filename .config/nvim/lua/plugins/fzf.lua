@@ -9,6 +9,7 @@ local M = {
   opts = function()
     local fzf = require 'fzf-lua'
     local actions = fzf.actions
+    local actions_trouble = require('trouble.sources.fzf').actions
     local config = fzf.config
 
     -- quickfix
@@ -20,6 +21,10 @@ local M = {
     config.defaults.keymap.fzf['ctrl-b'] = 'preview-page-up'
     config.defaults.keymap.builtin['<c-f>'] = 'preview-page-down'
     config.defaults.keymap.builtin['<c-b>'] = 'preview-page-up'
+
+    -- trouble
+    config.defaults.actions.files['ctrl-t'] = actions_trouble.open
+    config.defaults.actions.files['ctrl-e'] = actions_trouble.add
 
     -- Check for image previewer
     local img_previewer ---@type string[]?
