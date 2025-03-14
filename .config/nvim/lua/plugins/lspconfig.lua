@@ -39,53 +39,31 @@ local M = { -- LSP Configuration & Plugins
             { buffer = event.buf, desc = 'LSP: ' .. desc }
           )
         end
+        local fzf = require 'fzf-lua'
 
-        -- Jump to the definition of the word under your cursor.
-        --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map(
-          'gd',
-          require('telescope.builtin').lsp_definitions,
-          '[G]oto [D]efinition'
-        )
+        map('gd', fzf.lsp_definitions, '[G]oto [D]efinition')
 
         -- Find references for the word under your cursor.
-        map(
-          'gr',
-          require('telescope.builtin').lsp_references,
-          '[G]oto [R]eferences'
-        )
+        map('gr', fzf.lsp_references, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
-        --  Useful when your language has ways of declaring types without an actual implementation.
-        map(
-          'gI',
-          require('telescope.builtin').lsp_implementations,
-          '[G]oto [I]mplementation'
-        )
+        map('gI', fzf.lsp_implementations, '[G]oto [I]mplementation')
 
         -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        map(
-          '<leader>D',
-          require('telescope.builtin').lsp_type_definitions,
-          'Type [D]efinition'
-        )
+        map('<leader>D', fzf.lsp_typedefs, 'Type [D]efinition')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map(
-          '<leader>ds',
-          require('telescope.builtin').lsp_document_symbols,
-          '[D]ocument [S]ymbols'
-        )
+        map('<leader>ds', fzf.lsp_document_symbols, '[D]ocument [S]ymbols')
 
-        -- Fuzzy find all the symbols in your current workspace.
+        -- Combined view of all lsp locations
+        map('<leader>df', fzf.lsp_finder, '[D]ocument [F]inder')
+
         --  Similar to document symbols, except searches over your entire project.
         map(
           '<leader>ws',
-          require('telescope.builtin').lsp_dynamic_workspace_symbols,
+          fzf.lsp_live_workspace_symbols,
           '[W]orkspace [S]ymbols'
         )
 
@@ -95,9 +73,9 @@ local M = { -- LSP Configuration & Plugins
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<leader>ca', fzf.lsp_code_actions, '[C]ode [A]ction')
 
-        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        map('gD', fzf.lsp_declarations, '[G]oto [D]eclaration')
 
         map('[d', function()
           vim.diagnostic.jump { count = -1, float = { border = 'rounded' } }
@@ -107,6 +85,10 @@ local M = { -- LSP Configuration & Plugins
           vim.diagnostic.jump { count = 1, float = { border = 'rounded' } }
         end, 'Jump to Previous Diagnostic')
 
+        map('K', function()
+          vim.lsp.buf.hover { border = 'rounded' }
+        end, 'Hover')
+
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -114,7 +96,8 @@ local M = { -- LSP Configuration & Plugins
         if
           client
           and client.supports_method(
-            vim.lsp.protocol.Methods.textDocument_documentHighlight
+            vim.lsp.protocol.Methods.textDocument_documentHighlight,
+            nil
           )
         then
           local highlight_augroup = vim.api.nvim_create_augroup(
@@ -178,7 +161,8 @@ local M = { -- LSP Configuration & Plugins
         if
           client
           and client.supports_method(
-            vim.lsp.protocol.Methods.textDocument_inlayHint
+            vim.lsp.protocol.Methods.textDocument_inlayHint,
+            vim.api.nvim_get_current_buf
           )
         then
           map('<leader>th', function()
@@ -192,26 +176,17 @@ local M = { -- LSP Configuration & Plugins
         if
           client
           and client.supports_method(
-            vim.lsp.protocol.Methods.textDocument_signatureHelp
+            vim.lsp.protocol.Methods.textDocument_signatureHelp,
+            vim.api.nvim_get_current_buf
           )
         then
-          vim.keymap.set(
-            'i',
-            '<C-k>',
-            vim.lsp.buf.signature_help,
-            { buffer = event.buf, desc = 'LSP: Show Signature Help' }
-          )
-        end
-
-        -- Change hover float to have borders
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-          vim.lsp.handlers.hover,
-          { border = 'rounded', focusable = true }
-        )
-        vim.lsp.handlers['textDocument/signatureHelp'] =
-          vim.lsp.with(vim.lsp.handlers.signature_help, {
-            border = 'rounded',
+          vim.keymap.set('i', '<C-k>', function()
+            vim.lsp.buf.signature_help { border = 'rounded' }
+          end, {
+            buffer = event.buf,
+            desc = 'LSP: Show Signature Help',
           })
+        end
       end,
     })
 
