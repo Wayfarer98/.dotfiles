@@ -23,6 +23,7 @@ local M = { -- Autocompletion
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-buffer',
+    'windwp/nvim-autopairs',
   },
 
   config = function()
@@ -108,6 +109,26 @@ local M = { -- Autocompletion
         { name = 'cmdline' },
       },
     })
+    -- Setup auto parenthesis for lua
+    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+    local handlers = require 'nvim-autopairs.completion.handlers'
+
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done {
+        filetypes = {
+          lua = {
+            ['('] = {
+              kind = {
+                cmp.lsp.CompletionItemKind.Function,
+                cmp.lsp.CompletionItemKind.Method,
+              },
+              handler = handlers['*'],
+            },
+          },
+        },
+      }
+    )
   end,
 }
 return M
