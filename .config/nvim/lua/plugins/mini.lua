@@ -13,8 +13,6 @@ local M = { -- Collection of various small independent plugins/modules
 
     -- General workflow
     require('mini.files').setup(opts.files)
-    require('mini.jump').setup()
-    require('mini.jump2d').setup(opts.jump2d)
     require('mini.git').setup()
 
     -- Appearance
@@ -35,7 +33,7 @@ local M = { -- Collection of various small independent plugins/modules
             if vim.fn.expand '%' == 'Starter' then
               files.open()
             else
-              files.open(vim.api.nvim_buf_get_name(0))
+              files.open(vim.api.nvim_buf_get_name(0), false)
             end
           end
         end,
