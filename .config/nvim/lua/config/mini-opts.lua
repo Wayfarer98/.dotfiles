@@ -3,11 +3,6 @@ local pad = vim.o.cmdheight + (vim.o.laststatus > 0 and 1 or 0) + 1
 local hipatterns = require 'mini.hipatterns'
 
 local M = {
-  jump2d = {
-    mappings = {
-      start_jumping = '<leader>j',
-    },
-  },
   files = {
     mappings = {
       go_in_plus = '<CR>',
