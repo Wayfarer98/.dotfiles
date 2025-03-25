@@ -193,6 +193,13 @@ local M = { -- LSP Configuration & Plugins
             desc = 'LSP: Show Signature Help',
           })
         end
+        if client and client.name == 'clangd' then
+          map(
+            '<leader>ch',
+            '<cmd>ClangdSwitchSourceHeader<cr>',
+            'Switch Source/Header'
+          )
+        end
       end,
     })
 
@@ -232,13 +239,6 @@ local M = { -- LSP Configuration & Plugins
       marksman = {}, -- Markdown LSP
       pyright = {}, -- Python LSP
       clangd = {
-        keys = {
-          {
-            '<leader>ch',
-            '<cmd>ClangdSwitchSourceHeader<cr>',
-            desc = 'Switch Source/Header (C/C++)',
-          },
-        },
         root_dir = function(fname)
           return require('lspconfig.util').root_pattern(
             'Makefile',
