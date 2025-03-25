@@ -11,8 +11,6 @@ local M = {
         python = { 'ruff' },
         json = {},
         text = {},
-        cpp = { 'cpplint' },
-        c = { 'cpplint' },
         cmake = { 'cmakelint' },
       }
 
