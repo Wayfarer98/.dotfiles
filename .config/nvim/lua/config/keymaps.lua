@@ -148,7 +148,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>Y',
-  '"+Y',
+  '"+y$',
   { desc = 'Yank remaining line to system clipboard' }
 )
 
