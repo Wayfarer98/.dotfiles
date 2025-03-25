@@ -40,6 +40,12 @@ local M = { -- LSP Configuration & Plugins
           )
         end
         local fzf = require 'fzf-lua'
+        -- Delete default keymaps
+        vim.keymap.del('n', 'grn')
+        vim.keymap.del('n', 'gra')
+        vim.keymap.del('n', 'grr')
+        vim.keymap.del('n', 'gri')
+        vim.keymap.del({ 'i', 's' }, '<C-S>')
 
         --  To jump back, press <C-t>.
         map('gd', fzf.lsp_definitions, '[G]oto [D]efinition')
