@@ -57,7 +57,7 @@ local M = { -- LSP Configuration & Plugins
         map('gI', fzf.lsp_implementations, '[G]oto [I]mplementation')
 
         -- Jump to the type of the word under your cursor.
-        map('<leader>D', fzf.lsp_typedefs, 'Type [D]efinition')
+        map('gtd', fzf.lsp_typedefs, 'Type [D]efinition')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
