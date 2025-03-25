@@ -36,12 +36,11 @@ local workspaces = {
     {
       title = 'Terminal',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
-      command = 'source venv/bin/activate\nclear',
     },
     {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/Speciale',
-      command = 'source venv/bin/activate\nclear\nnvim',
+      command = 'nvim',
     },
   },
   DPP = {
