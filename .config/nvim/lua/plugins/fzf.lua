@@ -203,7 +203,7 @@ local M = {
         desc = 'Search highlight groups',
       },
       {
-        '<leader>sc',
+        '<leader>sC',
         fzf.commands,
         desc = 'Search neovim commands',
       },
@@ -262,17 +262,17 @@ local M = {
 
       -- DAP
       {
-        '<leader>dc',
+        '<leader>bc',
         fzf.dap_commands,
         desc = 'DAP commands',
       },
       {
-        '<leader>dC',
+        '<leader>bC',
         fzf.dap_configurations,
         desc = 'DAP configurations',
       },
       {
-        '<leader>db',
+        '<leader>bb',
         fzf.dap_breakpoints,
         desc = 'DAP breakpoints',
       },
