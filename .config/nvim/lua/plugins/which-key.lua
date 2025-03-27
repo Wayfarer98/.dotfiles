@@ -7,7 +7,7 @@ local M = { -- Useful plugin to show you pending keybinds.
     -- Document existing key chains
     require('which-key').add {
       { '<leader>c', group = 'Code' },
-      { '<leader>d', group = 'Document' },
+      { '<leader>d', group = 'Debug' },
       { '<leader>r', group = 'Rename' },
       { '<leader>s', group = 'Search' },
       { '<leader>f', group = 'Find' },
