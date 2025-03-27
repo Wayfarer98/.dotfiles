@@ -40,12 +40,6 @@ local M = { -- LSP Configuration & Plugins
           )
         end
         local fzf = require 'fzf-lua'
-        -- Delete default keymaps
-        vim.keymap.del('n', 'grn')
-        vim.keymap.del('n', 'gra')
-        vim.keymap.del('n', 'grr')
-        vim.keymap.del('n', 'gri')
-        vim.keymap.del({ 'i', 's' }, '<C-S>')
 
         --  To jump back, press <C-t>.
         map('gd', fzf.lsp_definitions, '[G]oto [D]efinition')
@@ -59,12 +53,7 @@ local M = { -- LSP Configuration & Plugins
         -- Jump to the type of the word under your cursor.
         map('gtd', fzf.lsp_typedefs, 'Type [D]efinition')
 
-        -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        map('<leader>ds', fzf.lsp_document_symbols, '[D]ocument [S]ymbols')
-
-        -- Combined view of all lsp locations
-        map('<leader>df', fzf.lsp_finder, '[D]ocument [F]inder')
+        map('<leader>ss', fzf.lsp_document_symbols, 'Search Symbols')
 
         --  Similar to document symbols, except searches over your entire project.
         map(
