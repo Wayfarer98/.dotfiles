@@ -4,6 +4,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Delete default keymaps
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del({ 'i', 's' }, '<C-S>')
+
 -- Keep cursor in the middle while jumping to next match
 vim.keymap.set(
   'n',
@@ -114,12 +121,6 @@ vim.keymap.set(
   '<leader>P',
   '"+P',
   { desc = 'Paste above from system clipboard' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>d',
-  '"+d',
-  { desc = 'Start deletion to system clipboard' }
 )
 vim.keymap.set(
   'v',
