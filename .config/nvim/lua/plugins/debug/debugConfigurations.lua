@@ -52,5 +52,17 @@ M.cpp = {
     args = {},
     runInTerminal = true,
   },
+  {
+    name = 'duckdb',
+    type = 'cppdbg',
+    request = 'launch',
+    program = function()
+      return vim.fn.getcwd() .. '/build/reldebug/duckdb'
+    end,
+    cwd = vim.fn.getcwd(),
+    stopOnEntry = false,
+    args = { 'test.db' },
+    runInTerminal = true,
+  },
 }
 return M
