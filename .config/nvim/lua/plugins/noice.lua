@@ -1,6 +1,6 @@
 local M = {
   'folke/noice.nvim',
-  event = 'BufRead',
+  lazy = false,
   enabled = true,
   opts = {
     lsp = {
