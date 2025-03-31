@@ -183,7 +183,7 @@ local M = {
       {
         '<leader>sc',
         function()
-          fzf.grep_live { cwd = vim.fn.expand '$HOME/.config/nvim' }
+          fzf.live_grep_glob { cwd = vim.fn.expand '$HOME/.config/nvim' }
         end,
         desc = 'Search in neovim files',
       },
@@ -233,6 +233,11 @@ local M = {
         '<leader>gc',
         fzf.git_commits,
         desc = 'Search git commits',
+      },
+      {
+        '<leader>gC',
+        fzf.git_bcommits,
+        desc = 'Search git commits (buffer)',
       },
       {
         '<leader>gs',
