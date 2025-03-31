@@ -38,6 +38,7 @@ local M = {
   diff = {
     view = {
       style = 'sign',
+      priority = 9,
     },
   },
 }
