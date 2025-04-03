@@ -53,7 +53,7 @@ M.cpp = {
     runInTerminal = true,
   },
   {
-    name = 'duckdb',
+    name = 'duckdb dev',
     type = 'cppdbg',
     request = 'launch',
     program = function()
@@ -61,7 +61,19 @@ M.cpp = {
     end,
     cwd = vim.fn.getcwd(),
     stopOnEntry = false,
-    args = { 'test.db' },
+    args = { '/dev/disk/by-label/LinuxData/Speciale/test.db' },
+    runInTerminal = true,
+  },
+  {
+    name = 'duckdb mnt',
+    type = 'cppdbg',
+    request = 'launch',
+    program = function()
+      return vim.fn.getcwd() .. '/build/reldebug/duckdb'
+    end,
+    cwd = vim.fn.getcwd(),
+    stopOnEntry = false,
+    args = { '/mnt/LinuxData/Speciale/test.db' },
     runInTerminal = true,
   },
 }
