@@ -29,8 +29,8 @@ local M = { -- Collection of various small independent plugins/modules
           if files.get_explorer_state() then
             files.close()
           else
-            if vim.fn.expand '%' == 'Starter' then
-              files.open()
+            if vim.fn.expand '%' == 'ministarter://1/welcome' then
+              files.open(nil, false)
             else
               files.open(vim.api.nvim_buf_get_name(0), false)
             end
