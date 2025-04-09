@@ -43,21 +43,6 @@ local workspaces = {
       command = 'nvim',
     },
   },
-  DPP = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
-    },
-    {
-      title = 'SSH',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/Kandidat/DPP',
-      command = 'nvim',
-    },
-  },
   TA = {
     {
       title = 'Terminal',
@@ -68,18 +53,6 @@ local workspaces = {
       title = 'Code',
       directory = os.getenv 'HOME' .. '/Documents/Repos/TA',
       command = 'source staffeli_nt/env/bin/activate\nclear\nnvim',
-    },
-  },
-  AOC = {
-    {
-      title = 'Terminal',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
-      command = 'source venv/bin/activate\nclear',
-    },
-    {
-      title = 'Code',
-      directory = os.getenv 'HOME' .. '/Documents/Repos/AdventOfCode/2024',
-      command = 'source venv/bin/activate\nclear\nnvim',
     },
   },
   CS = {
