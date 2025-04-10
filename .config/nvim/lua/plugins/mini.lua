@@ -17,7 +17,7 @@ local M = { -- Collection of various small independent plugins/modules
     -- Appearance
     require('mini.indentscope').setup(opts.indentscope)
     require('mini.hipatterns').setup(opts.hipatterns)
-    -- require('mini.starter').setup()
+    require('mini.starter').setup()
     require('mini.diff').setup(opts.diff)
   end,
   keys = function()
