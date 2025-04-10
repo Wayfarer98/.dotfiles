@@ -50,6 +50,9 @@ vim.opt.splitbelow = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- Disable swap files
+vim.opt.swapfile = false
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
