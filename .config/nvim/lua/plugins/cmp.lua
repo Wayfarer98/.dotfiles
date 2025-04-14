@@ -1,3 +1,5 @@
+vim.opt.spell = true
+vim.opt.spelllang = { 'en', 'da' }
 local M = { -- Autocompletion
   'hrsh7th/nvim-cmp',
   enabled = true,
@@ -82,6 +84,7 @@ local M = { -- Autocompletion
         },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'buffer' },
       },
       window = {
         completion = cmp.config.window.bordered(),
@@ -89,7 +92,7 @@ local M = { -- Autocompletion
       },
     }
 
-    -- Setup for commandline
+    -- Setup for command line
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline {
         ['<C-y>'] = cmp.mapping.confirm { select = true },
