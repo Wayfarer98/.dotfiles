@@ -53,19 +53,7 @@ M.cpp = {
     runInTerminal = true,
   },
   {
-    name = 'duckdb dev',
-    type = 'cppdbg',
-    request = 'launch',
-    program = function()
-      return vim.fn.getcwd() .. '/build/reldebug/duckdb'
-    end,
-    cwd = vim.fn.getcwd(),
-    stopOnEntry = false,
-    args = { '/dev/disk/by-label/LinuxData/Speciale/test.db' },
-    runInTerminal = true,
-  },
-  {
-    name = 'duckdb mnt',
+    name = 'duckdb fh',
     type = 'cppdbg',
     request = 'launch',
     program = function()
@@ -74,6 +62,30 @@ M.cpp = {
     cwd = vim.fn.getcwd(),
     stopOnEntry = false,
     args = { '/mnt/LinuxData/Speciale/test.db' },
+    runInTerminal = true,
+  },
+  {
+    name = 'duckdb xnvme sync',
+    type = 'cppdbg',
+    request = 'launch',
+    program = function()
+      return vim.fn.getcwd() .. '/build/reldebug/duckdb'
+    end,
+    cwd = vim.fn.getcwd(),
+    stopOnEntry = false,
+    args = { '-xsync', '/mnt/LinuxData/Speciale/test.db' },
+    runInTerminal = true,
+  },
+  {
+    name = 'duckdb xnvme async',
+    type = 'cppdbg',
+    request = 'launch',
+    program = function()
+      return vim.fn.getcwd() .. '/build/reldebug/duckdb'
+    end,
+    cwd = vim.fn.getcwd(),
+    stopOnEntry = false,
+    args = { '-xasync', '/mnt/LinuxData/Speciale/test.db' },
     runInTerminal = true,
   },
 }
