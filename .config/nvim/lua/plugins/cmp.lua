@@ -1,5 +1,3 @@
-vim.opt.spell = true
-vim.opt.spelllang = { 'en', 'da' }
 local M = { -- Autocompletion
   'hrsh7th/nvim-cmp',
   enabled = true,
