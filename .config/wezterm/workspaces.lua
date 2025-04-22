@@ -55,6 +55,21 @@ local workspaces = {
       command = 'source staffeli_nt/env/bin/activate\nclear\nnvim',
     },
   },
+  PCS = {
+    {
+      title = 'Terminal',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/TA/PCS/VM',
+    },
+    {
+      title = 'SSH',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/TA/PCS/VM',
+    },
+    {
+      title = 'Code',
+      directory = os.getenv 'HOME' .. '/Documents/Repos/TA/PCS/VM',
+      command = 'nvim\n',
+    },
+  },
   CS = {
     {
       title = 'Terminal',
