@@ -4,8 +4,11 @@ cursor-style = block
 cursor-style-blink = false
 cursor-click-to-move = true
 background-opacity = 0.9
-fullscreen = true
+maximize = true
 keybind = ctrl+a>ctrl+q=quit
+confirm-close-surface=false
+keybind = unconsumed:ctrl+tab=next_tab
+keybind = unconsumed:ctrl+shift+tab=previous_tab
 window-decoration = none
 cursor-text = #000000
 # This is the configuration file for Ghostty.
