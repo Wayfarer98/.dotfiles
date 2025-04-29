@@ -38,6 +38,17 @@ local M = { -- Collection of various small independent plugins/modules
         end,
         desc = 'open mini file explorer',
       },
+      {
+        '|',
+        function()
+          if files.get_explorer_state() then
+            files.close()
+          else
+            files.open(nil, false)
+          end
+        end,
+        desc = 'open mini file explorer',
+      },
     }
   end,
 }
