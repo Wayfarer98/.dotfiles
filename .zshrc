@@ -154,7 +154,7 @@ export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/development/flutter/bin
 
 # Start tmux if not inside tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [[ "$TERM" == "xterm-ghostty" ]] && [ -z "$TMUX" ]; then
   exec tmux new-session -A -s main
 fi
 
