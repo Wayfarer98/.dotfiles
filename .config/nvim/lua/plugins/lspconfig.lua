@@ -287,6 +287,7 @@ local M = { -- LSP Configuration & Plugins
       'cmakelang', -- Needed for cmake-format apparently
       'cpptools', -- debugger, apparently cannot be installed from dap ensure installed
       'asm-lsp', -- LSP for assembly
+      'textlsp', -- LSP for text files such as .txt and .org
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
