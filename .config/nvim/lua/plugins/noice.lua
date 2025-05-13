@@ -26,7 +26,7 @@ local M = {
     },
   },
   dependencies = {
-    { 'MunifTanjim/nui.nvim', commit = '8d3bce9' },
+    { 'MunifTanjim/nui.nvim' },
   },
 }
 
