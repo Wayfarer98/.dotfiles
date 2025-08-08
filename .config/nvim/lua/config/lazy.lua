@@ -19,6 +19,9 @@ require('lazy').setup {
   spec = {
     { import = 'plugins' },
   },
+  ui = {
+    border = 'rounded',
+  },
 
   checker = { enabled = false, notify = false },
   change_detection = { enabled = false, notify = false },
