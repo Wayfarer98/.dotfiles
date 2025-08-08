@@ -3,8 +3,8 @@ local M = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-    'williamboman/mason-lspconfig.nvim',
+    { 'mason-org/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+    'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
 
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -265,6 +265,7 @@ local M = { -- LSP Configuration & Plugins
       cmake = {},
       asm_lsp = {},
       textlsp = {},
+      roslyn = {},
     }
 
     -- Ensure the servers and tools above are installed
@@ -288,6 +289,7 @@ local M = { -- LSP Configuration & Plugins
       'cmakelint', -- CMake Linter
       'cmakelang', -- Needed for cmake-format apparently
       'cpptools', -- debugger, apparently cannot be installed from dap ensure installed
+      'roslyn', -- C# LSP, we don't want to have a server setup, as we use a plugin for it
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -309,6 +311,7 @@ local M = { -- LSP Configuration & Plugins
       },
       ensure_installed = {},
       automatic_installation = false,
+      automatic_enable = true,
     }
 
     -- Setup cool lsp signs
