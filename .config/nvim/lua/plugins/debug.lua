@@ -6,7 +6,7 @@ return {
     'nvim-neotest/nvim-nio',
     {
       'jay-babu/mason-nvim-dap.nvim',
-      dependencies = 'williamboman/mason.nvim',
+      dependencies = 'mason-org/mason.nvim',
       cmd = { 'DapInstall', 'DapUninstall' },
     },
     'mfussenegger/nvim-dap-python',
