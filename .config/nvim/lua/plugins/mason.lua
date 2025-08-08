@@ -1,5 +1,5 @@
 local M = {
-  'williamboman/mason.nvim',
+  'mason-org/mason.nvim',
   opts = {
     ui = {
       icons = {
@@ -7,6 +7,10 @@ local M = {
         package_pending = '➜',
         package_uninstalled = '✗',
       },
+    },
+    registries = {
+      'github:mason-org/mason-registry',
+      'github:Crashdummyy/mason-registry',
     },
   },
 }
