@@ -90,7 +90,7 @@ local M = { -- LSP Configuration & Plugins
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if
           client
-          and client.supports_method(
+          and client:supports_method(
             vim.lsp.protocol.Methods.textDocument_documentHighlight,
             nil
           )
@@ -155,7 +155,7 @@ local M = { -- LSP Configuration & Plugins
         -- This may be unwanted, since they displace some of your code
         if
           client
-          and client.supports_method(
+          and client:supports_method(
             vim.lsp.protocol.Methods.textDocument_inlayHint,
             vim.api.nvim_get_current_buf()
           )
@@ -170,7 +170,7 @@ local M = { -- LSP Configuration & Plugins
         -- Show signature help
         if
           client
-          and client.supports_method(
+          and client:supports_method(
             vim.lsp.protocol.Methods.textDocument_signatureHelp,
             vim.api.nvim_get_current_buf()
           )
