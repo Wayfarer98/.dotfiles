@@ -33,7 +33,9 @@ return {
 
     -- setup all adapters that are defined in debugAdapters.lua
     for name, adapter in pairs(adapters) do
-      dap.adapters[name] = adapter
+      if not name == 'ensure_installed' then
+        dap.adapters[name] = adapter
+      end
     end
 
     -- setup all configurations that are defined in debugConfigurations.lua
