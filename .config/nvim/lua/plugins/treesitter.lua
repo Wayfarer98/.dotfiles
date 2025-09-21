@@ -17,6 +17,7 @@ local M = { -- Highlight, edit, and navigate code
       'query',
       'vim',
       'vimdoc',
+      'regex',
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
