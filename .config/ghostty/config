@@ -1,5 +1,5 @@
 font-size = 14
-theme = catppuccin-mocha
+theme = catppuccin-mocha.conf
 cursor-style = block
 cursor-style-blink = false
 cursor-click-to-move = true
