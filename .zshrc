@@ -75,7 +75,6 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     docker
-    eza
     nvm
 )
 source $ZSH/oh-my-zsh.sh
@@ -123,7 +122,7 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 #source /usr/share/fzf/shell/key-bindings.zsh
 
